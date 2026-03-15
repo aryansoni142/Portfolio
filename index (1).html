@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aryan Soni — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:            #f0ede6;
+      --navy:          #0e1c38;
+      --navy2:         #162d5a;
+      --navy-faint:    rgba(14,28,56,0.05);
+      --navy-light:    rgba(14,28,56,0.10);
+      --navy-border:   rgba(14,28,56,0.15);
+      --muted:         rgba(14,28,56,0.42);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--navy);
+      font-family: 'DM Sans', Georgia, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 6vw;
+      background: rgba(240,237,230,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .nav-logo {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--navy); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color .18s;
+    }
+    .nav-links a:hover { color: var(--navy); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 6vw 5rem;
+      border-bottom: 1px solid var(--navy-border);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-text {
+      position: absolute; bottom: -0.06em; left: -0.02em;
+      font-size: clamp(22vw, 26vw, 30vw);
+      font-weight: 600; letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--navy-border);
+      line-height: 1; pointer-events: none; user-select: none;
+      white-space: nowrap;
+    }
+    .hero-top {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-top: 9rem; margin-bottom: auto;
+    }
+    .hero-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-tag-right {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); text-align: right; line-height: 1.8;
+    }
+    .hero-name {
+      position: relative; z-index: 1;
+      font-size: clamp(3.8rem, 8vw, 7.5rem);
+      font-weight: 600; letter-spacing: -0.02em;
+      color: var(--navy); line-height: 1; margin-bottom: 1.8rem;
+    }
+    .hero-bottom {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .hero-roles { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .role-pill {
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      border: 1px solid var(--navy-border);
+      font-size: 0.78rem; font-weight: 400; color: var(--navy);
+    }
+    .hero-scroll {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-scroll::after {
+      content: ''; display: block; width: 1px; height: 32px;
+      background: var(--muted); opacity: 0.5;
+    }
+
+    /* SHARED */
+    .sec { padding: 6rem 6vw; max-width: 1200px; margin: 0 auto; }
+    .divider { height: 1px; background: var(--navy-border); }
+    .sec-header {
+      display: grid; grid-template-columns: auto 1fr;
+      align-items: baseline; gap: 1rem; margin-bottom: 3.5rem;
+    }
+    .sec-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; color: var(--muted);
+    }
+    h2 { font-size: 2rem; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+
+    /* INTRODUCTION */
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .intro-main {
+      background: var(--navy); border-radius: 6px; padding: 2.8rem;
+      display: flex; flex-direction: column; gap: 1.4rem;
+    }
+    .intro-main-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.35);
+    }
+    .intro-placeholder {
+      font-size: 1rem; font-weight: 300; line-height: 1.85;
+      color: rgba(240,237,230,1); font-style: normal;
+      padding: 0;
+    }
+    .intro-placeholder span {
+      display: block; margin-bottom: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(240,237,230,0.25); font-style: normal;
+    }
+    .intro-side { display: flex; flex-direction: column; gap: 1.5rem; }
+    .intro-card {
+      border: 1px solid var(--navy-border); border-radius: 6px;
+      padding: 1.8rem; flex: 1; transition: background .18s;
+    }
+    .intro-card:hover { background: var(--navy-faint); }
+    .intro-card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.7rem;
+    }
+    .intro-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; font-weight: 300; }
+    .intro-card p strong { color: var(--navy); font-weight: 500; }
+
+    /* EDUCATION */
+    .prof-summary {
+      background: var(--navy); border-radius: 6px;
+      padding: 2.4rem 2.8rem; margin-bottom: 1.2rem;
+    }
+    .prof-summary-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.35); margin-bottom: 1rem;
+    }
+    .prof-summary p {
+      font-size: 0.95rem; line-height: 1.85;
+      color: rgba(240,237,230,0.68); font-weight: 300;
+    }
+    .prof-summary p strong { color: rgba(240,237,230,0.95); font-weight: 500; }
+    .edu-stack { display: flex; flex-direction: column; gap: 1.2rem; }
+    .edu-card {
+      border: 1px solid var(--navy-border); border-radius: 6px;
+      padding: 2.2rem 2.4rem;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 0.8rem; transition: background .18s;
+    }
+    .edu-card:hover { background: var(--navy-faint); }
+    .edu-deg { font-size: 1.2rem; font-weight: 600; color: var(--navy); }
+    .edu-school { font-size: 0.87rem; color: var(--muted); margin-top: 0.25rem; font-weight: 300; }
+    .edu-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.5rem;
+    }
+    .edu-grade-n {
+      font-size: 2.6rem; font-weight: 600; color: var(--navy);
+      line-height: 1; text-align: right;
+    }
+    .edu-grade-l {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); text-align: right;
+    }
+    .edu-tags { grid-column: span 2; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+    .tag {
+      padding: 0.25rem 0.7rem; border-radius: 2px; font-size: 0.75rem;
+      border: 1px solid var(--navy-border); color: var(--navy); background: transparent;
+    }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .skill-card {
+      border: 1px solid var(--navy-border); border-radius: 6px;
+      padding: 1.7rem; transition: background .18s;
+    }
+    .skill-card:hover { background: var(--navy-faint); }
+    .skill-card.filled { background: var(--navy); border-color: var(--navy); }
+    .skill-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .skill-card.filled .skill-label { color: rgba(240,237,230,0.4); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-card.filled .tag {
+      border-color: rgba(240,237,230,0.18);
+      color: rgba(240,237,230,0.82);
+      background: rgba(240,237,230,0.06);
+    }
+
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; }
+    .proj-row {
+      display: grid; grid-template-columns: 2.5rem 1fr 4rem;
+      gap: 2rem; align-items: start;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--navy-border);
+      transition: background .18s, padding .18s;
+    }
+    .proj-row:first-child { border-top: 1px solid var(--navy-border); }
+    .proj-row:hover {
+      background: var(--navy-faint);
+      padding-left: 0.7rem; padding-right: 0.7rem;
+      margin: 0 -0.7rem; border-radius: 4px;
+    }
+    .proj-idx {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); padding-top: 0.25rem;
+    }
+    .proj-body { display: flex; flex-direction: column; gap: 0.5rem; }
+    .proj-title { font-size: 1.1rem; font-weight: 600; color: var(--navy); }
+    .proj-tool {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    }
+    .proj-desc {
+      font-size: 0.87rem; color: var(--muted);
+      line-height: 1.72; font-weight: 300; max-width: 600px;
+    }
+    .proj-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--muted); padding-top: 0.25rem; text-align: right;
+    }
+
+    /* CREATIVE */
+    #creative-wrap { background: var(--navy); }
+    #creative-wrap .sec-num { color: rgba(240,237,230,0.3); }
+    #creative-wrap h2 { color: rgba(240,237,230,0.95); }
+    .creative-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.8rem; }
+    .creative-bio {
+      background: rgba(240,237,230,0.06); border: 1px solid rgba(240,237,230,0.1);
+      border-radius: 6px; padding: 2.4rem;
+    }
+    .creative-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.35); margin-bottom: 0.8rem;
+    }
+    .creative-bio p {
+      font-size: 0.93rem; line-height: 1.82;
+      color: rgba(240,237,230,0.62); font-weight: 300;
+    }
+    .creative-bio p strong { color: rgba(240,237,230,0.92); font-weight: 500; }
+    .creative-feats { display: flex; flex-direction: column; gap: 1rem; }
+    .feat {
+      border: 1px solid rgba(240,237,230,0.1); border-radius: 6px;
+      padding: 1.3rem 1.5rem; display: flex; gap: 1rem; flex: 1;
+      transition: background .18s;
+    }
+    .feat:hover { background: rgba(240,237,230,0.05); }
+    .feat-ico { font-size: 1.1rem; flex-shrink: 0; }
+    .feat-title { font-size: 0.9rem; font-weight: 500; color: rgba(240,237,230,0.88); }
+    .feat-desc { font-size: 0.79rem; color: rgba(240,237,230,0.42); line-height: 1.6; font-weight: 300; margin-top: 0.2rem; }
+    .creative-tools-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.3); margin-bottom: 1rem;
+    }
+    .creative-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 3rem; }
+    .creative-tag {
+      padding: 0.26rem 0.75rem; border-radius: 2px; font-size: 0.76rem;
+      border: 1px solid rgba(240,237,230,0.14); color: rgba(240,237,230,0.65);
+    }
+    .video-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.3); margin-bottom: 1.1rem;
+    }
+    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .video-card {
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(240,237,230,0.1);
+      background: rgba(240,237,230,0.04);
+      transition: border-color .2s, transform .2s;
+    }
+    .video-card:hover { border-color: rgba(240,237,230,0.28); transform: translateY(-3px); }
+    .video-thumb {
+      aspect-ratio: 16/9; width: 100%; position: relative;
+      background: rgba(240,237,230,0.04);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-thumb iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .play-ring {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid rgba(240,237,230,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; color: rgba(240,237,230,0.45);
+      transition: all .18s;
+    }
+    .video-card:hover .play-ring { border-color: rgba(240,237,230,0.65); color: rgba(240,237,230,0.85); }
+    .ph-note {
+      position: absolute; bottom: 0.5rem; left: 0; right: 0; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,237,230,0.18);
+    }
+    .video-info { padding: 1rem 1.1rem; }
+    .video-type {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.57rem;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: rgba(240,237,230,0.32); margin-bottom: 0.3rem;
+    }
+    .video-title { font-size: 0.87rem; color: rgba(240,237,230,0.72); }
+    .embed-note {
+      margin-top: 1.4rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.06em; line-height: 1.9;
+      color: rgba(240,237,230,0.22);
+      border: 1px dashed rgba(240,237,230,0.1);
+      border-radius: 4px; padding: 1rem 1.2rem;
+    }
+    .embed-note span { color: rgba(240,237,230,0.48); }
+
+    /* ACHIEVEMENTS */
+    .ach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .ach-card {
+      border: 1px solid var(--navy-border); border-radius: 6px;
+      padding: 1.9rem; display: flex; flex-direction: column; gap: 0.65rem;
+      transition: background .18s;
+    }
+    .ach-card:hover { background: var(--navy-faint); }
+    .ach-card.filled { background: var(--navy); border-color: var(--navy); }
+    .ach-ico { font-size: 1.3rem; }
+    .ach-title { font-size: 0.92rem; font-weight: 600; color: var(--navy); }
+    .ach-card.filled .ach-title { color: rgba(240,237,230,0.92); }
+    .ach-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+    .ach-card.filled .ach-desc { color: rgba(240,237,230,0.45); }
+
+    /* RESUME */
+    #resume { padding: 6rem 6vw; border-top: 1px solid var(--navy-border); }
+    .resume-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .resume-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .resume-heading { font-size: 2rem; font-weight: 600; color: var(--navy); margin-bottom: 0.8rem; }
+    .resume-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.72; font-weight: 300; }
+    .resume-right { display: flex; flex-direction: column; gap: 1rem; }
+    .resume-card {
+      border: 1px solid var(--navy-border); border-radius: 6px;
+      padding: 1.6rem 2rem; display: flex; align-items: center; justify-content: space-between;
+      transition: background .18s;
+    }
+    .resume-card:hover { background: var(--navy-faint); }
+    .resume-filename { font-size: 0.9rem; font-weight: 500; color: var(--navy); }
+    .resume-filemeta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.2rem;
+    }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      background: var(--navy); color: var(--bg);
+      border: 1px solid var(--navy); border-radius: 3px;
+      font-size: 0.8rem; font-weight: 500;
+      text-decoration: none; transition: background .18s; white-space: nowrap;
+    }
+    .download-btn:hover { background: var(--navy2); }
+
+    /* CONTACT */
+    #contact { padding: 0 6vw 6rem; }
+    .contact-inner { max-width: 1200px; margin: 0 auto; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .contact-heading { font-size: 2rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+    .contact-sub { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .c-link {
+      display: flex; align-items: center; gap: 0.9rem;
+      padding: 0.9rem 1.2rem; border: 1px solid var(--navy-border);
+      border-radius: 4px; color: var(--navy); text-decoration: none;
+      font-size: 0.85rem; transition: background .18s, border-color .18s;
+    }
+    .c-link:hover { background: var(--navy-faint); border-color: var(--navy-light); }
+    .c-icon { font-size: 0.95rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--navy-border);
+      padding: 1.5rem 6vw;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em; color: var(--muted);
+    }
+
+    /* SCROLL REVEAL */
+    .reveal { transition: opacity .6s ease, transform .6s ease; }
+    .reveal.hidden { opacity: 0; transform: translateY(18px); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 1.1rem 4vw; }
+      #hero { padding: 0 4vw 4rem; }
+      .hero-bg-text { font-size: 38vw; }
+      .sec { padding: 5rem 4vw; }
+      .intro-grid { grid-template-columns: 1fr; }
+      .creative-layout { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .ach-grid { grid-template-columns: repeat(2, 1fr); }
+      .edu-card { grid-template-columns: 1fr; }
+      .edu-grade-n, .edu-grade-l { text-align: left; }
+      .video-grid { grid-template-columns: 1fr; }
+      .resume-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .ach-grid { grid-template-columns: 1fr; }
+      .hero-name { font-size: clamp(2.8rem, 12vw, 4rem); }
+      .proj-row { grid-template-columns: 2rem 1fr; }
+      .proj-year { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Aryan Soni</a>
+  <ul class="nav-links">
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#creative">Creative</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">AS</div>
+  <div class="hero-top">
+    <div class="hero-tag">Chemical Engineer &nbsp;·&nbsp; Video Editor</div>
+    <div class="hero-tag-right">PDEU, Gandhinagar<br>Class of 2027</div>
+  </div>
+  <div class="hero-name">Aryan Soni</div>
+  <div class="hero-bottom">
+    <div class="hero-roles">
+      <span class="role-pill">B.Tech. Chemical Engineering</span>
+      <span class="role-pill">CGPA 9.53</span>
+      <span class="role-pill">100% Merit Scholar</span>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </div>
+</section>
+
+<!-- INTRODUCTION -->
+<div class="divider"></div>
+<section id="intro">
+  <div class="sec">
+    <div class="sec-header reveal">
+      <span class="sec-num">01</span>
+      <h2>Introduction</h2>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-main reveal">
+        <div class="intro-main-label">Who I am &nbsp;·&nbsp; What I believe &nbsp;·&nbsp; How I see the world</div>
+        <div class="intro-placeholder">
+          I am Aryan Soni - a Chemical Engineer who believes that precision and creativity are not mutually exlcusive. I approach every challenge, whether its designing a chemical reactor or crafting a creative solution, with same curiosity, analytical thinking and attention to detail.
+        </div>
+      </div>
+      <div class="intro-side">
+        <div class="intro-card reveal">
+          <div class="intro-card-label">Quick Facts</div>
+          <p>
+            Based in <strong>Ahmedabad, Gujarat</strong>.<br>
+            Chemical Engineering student at <strong>PDEU</strong>, graduating June 2027.<br>
+            CGPA <strong>9.53</strong> &nbsp;·&nbsp; 100% Merit Scholar every semester.
+          </p>
+        </div>
+        <div class="intro-card reveal">
+          <div class="intro-card-label">Beyond the Lab</div>
+          <p>
+            Graphic Designing Head at <strong>Respawn</strong> — Gaming Club of PDEU. Professional video editor with a <strong>₹22K freelance</strong> production and work screened <strong>6 times</strong> in auditoriums.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<div class="divider"></div>
+<section id="education">
+  <div class="sec">
+    <div class="sec-header reveal">
+      <span class="sec-num">02</span>
+      <h2>Education</h2>
+    </div>
+    <div class="prof-summary reveal">
+      <div class="prof-summary-label">Professional Summary</div>
+      <p>
+        A driven <strong>Chemical Engineering undergraduate</strong> at PDEU with a CGPA of <strong>9.53</strong> and a 100% merit scholarship every semester. Experienced in process simulation, reactor design, heat transfer optimisation, and CAD prototyping. Certified in <strong>Polymer Process Engineering</strong> from IIT-Roorkee (A+). Graphic Designing Head for Respawn - Gaming Club of PDEU. Also a professional video editor with end-to-end freelance production experience and work screened 6 times in auditoriums.
+      </p>
+    </div>
+    <div class="edu-stack">
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-deg">B.Tech. Chemical Engineering</div>
+          <div class="edu-school">Pandit Deendayal Energy University (PDEU), Gandhinagar</div>
+          <div class="edu-meta">2023 – 2027 &nbsp;·&nbsp; NIRF Rank 93 &nbsp;·&nbsp; NAAC AAA+</div>
+        </div>
+        <div>
+          <div class="edu-grade-n">9.53</div>
+          <div class="edu-grade-l">CGPA</div>
+        </div>
+        <div class="edu-tags">
+          <span class="tag">Mass Transfer</span>
+          <span class="tag">Heat Transfer</span>
+          <span class="tag">Reaction Engineering</span>
+          <span class="tag">Process Calculations</span>
+          <span class="tag">Equipment Design</span>
+          <span class="tag">Thermodynamics</span>
+          <span class="tag">Numerical Methods</span>
+        </div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-deg">Polymer Process Engineering</div>
+          <div class="edu-school">IIT-Roorkee &nbsp;·&nbsp; NPTEL Certification</div>
+          <div class="edu-meta">2025</div>
+        </div>
+        <div>
+          <div class="edu-grade-n">A+</div>
+          <div class="edu-grade-l">Grade</div>
+        </div>
+        <div class="edu-tags">
+          <span class="tag">Polymer Science</span>
+          <span class="tag">Injection Moulding</span>
+          <span class="tag">Extrusion</span>
+          <span class="tag">Polymer Reactions</span>
+          <span class="tag">Heat &amp; Mass Transfer in Polymers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="divider"></div>
+<section id="skills">
+  <div class="sec">
+    <div class="sec-header reveal">
+      <span class="sec-num">03</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card filled reveal">
+        <div class="skill-label">Process Simulation</div>
+        <div class="tags">
+          <span class="tag">DWSim</span>
+          <span class="tag">Distillation</span>
+          <span class="tag">Reactor Modelling</span>
+          <span class="tag">Heat Exchangers</span>
+          <span class="tag">Mass Balance</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-label">Core Engineering</div>
+        <div class="tags">
+          <span class="tag">Mass Transfer</span>
+          <span class="tag">Heat Transfer</span>
+          <span class="tag">Thermodynamics</span>
+          <span class="tag">Reaction Eng.</span>
+          <span class="tag">Numerical Methods</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-label">Design &amp; CAD</div>
+        <div class="tags">
+          <span class="tag">CAD Modelling</span>
+          <span class="tag">Prototyping</span>
+          <span class="tag">Solar Systems</span>
+          <span class="tag">Process Equipment</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-label">Polymer Engineering</div>
+        <div class="tags">
+          <span class="tag">Polymer Science</span>
+          <span class="tag">Injection Moulding</span>
+          <span class="tag">Extrusion</span>
+          <span class="tag">Polymer Reactions</span>
+        </div>
+      </div>
+      <div class="skill-card filled reveal">
+        <div class="skill-label">Video Production</div>
+        <div class="tags">
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">After Effects</span>
+          <span class="tag">Color Grading</span>
+          <span class="tag">Motion Graphics</span>
+          <span class="tag">Sound Design</span>
+	  <span class="tag">VFX</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-label">Soft Skills</div>
+        <div class="tags">
+          <span class="tag">Public Relations</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Finance & Budgeting</span>
+          <span class="tag">Freelancing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="divider"></div>
+<section id="projects">
+  <div class="sec">
+    <div class="sec-header reveal">
+      <span class="sec-num">04</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="projects-list">
+      <div class="proj-row reveal">
+        <div class="proj-idx">01</div>
+        <div class="proj-body">
+          <div class="proj-title">Dual-Axis Solar Tracker</div>
+          <div class="proj-tool">CAD Design &amp; Prototyping</div>
+          <div class="proj-desc">Designed a fully functional dual-axis solar tracking system to maximise daily energy capture, focusing on weight optimisation, material efficiency, and wiring layout. Featured in two newspapers and a regional news channel.</div>
+        </div>
+        <div class="proj-year">2024</div>
+      </div>
+      <div class="proj-row reveal">
+        <div class="proj-idx">02</div>
+        <div class="proj-body">
+          <div class="proj-title">Distillation Column Simulation</div>
+          <div class="proj-tool">DWSim &nbsp;·&nbsp; Process Simulation</div>
+          <div class="proj-desc">Simulated a binary distillation column with detailed mass and component balance calculations. Optimised reflux ratio and theoretical stages to hit purity targets with reduced energy consumption.</div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+      <div class="proj-row reveal">
+        <div class="proj-idx">03</div>
+        <div class="proj-body">
+          <div class="proj-title">Catalytic Reactor Simulation</div>
+          <div class="proj-tool">DWSim &nbsp;·&nbsp; Reactor Design</div>
+          <div class="proj-desc">Modelled homogeneous catalytic reactors under varying conditions. Analysed conversion, residence time, and temperature profiles to identify optimal reactor performance and deepen understanding of reaction kinetics.</div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+      <div class="proj-row reveal">
+        <div class="proj-idx">04</div>
+        <div class="proj-body">
+          <div class="proj-title">Heat Exchanger Optimisation</div>
+          <div class="proj-tool">Thermal Simulation</div>
+          <div class="proj-desc">Simulated a shell-and-tube heat exchanger to evaluate thermal performance. Optimised heat transfer area while minimising pressure drop — balancing efficiency and operational constraints.</div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVE -->
+<div class="divider"></div>
+<div id="creative-wrap">
+  <section id="creative">
+    <div class="sec">
+      <div class="sec-header reveal">
+        <span class="sec-num">05</span>
+        <h2>Creative Work</h2>
+      </div>
+      <div class="creative-layout">
+        <div class="creative-bio reveal">
+          <div class="creative-label">Video Editor</div>
+          <p>
+            Beyond the lab, I'm a <strong>professional video editor</strong> working across cinematic short films, wedding &amp; event coverage, YouTube content, and social media reels. I use <strong>Adobe Premiere Pro and After Effects</strong> to craft stories — from colour grading and sound design to motion graphics.
+            <br><br>
+            My work has been <strong>screened 6 times in auditoriums</strong> to live audiences, and I've delivered a <strong>&#8377;22,000 freelance production</strong> end-to-end.
+          </p>
+        </div>
+        <div class="creative-feats reveal">
+          <div class="feat">
+            <div class="feat-ico">&#128184;</div>
+            <div>
+              <div class="feat-title">&#8377;22,000 Freelance Project</div>
+              <div class="feat-desc">Delivered a full professional industry video production as a freelancer — end-to-end.</div>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="feat-ico">&#127909;</div>
+            <div>
+              <div class="feat-title">6&#215; Auditorium Screenings</div>
+              <div class="feat-desc">Videos screened 6 times in auditoriums to live audiences with real-time crowd reactions.</div>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="feat-ico">&#127902;</div>
+            <div>
+              <div class="feat-title">Multi-Format Production</div>
+              <div class="feat-desc">Short films, weddings, YouTube videos, and social reels — full range of formats.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="creative-tools-label">Tools</div>
+        <div class="creative-tags">
+          <span class="creative-tag">Adobe Premiere Pro</span>
+          <span class="creative-tag">After Effects</span>
+          <span class="creative-tag">Color Grading</span>
+          <span class="creative-tag">Motion Graphics</span>
+          <span class="creative-tag">Sound Design</span>
+          <span class="creative-tag">Reels &amp; Shorts</span>
+	  <span class="creative-tag">Vfx &amp; CGI</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="video-label">Video Showcase</div>
+        <div class="video-grid">
+          <div class="video-card">
+            <div class="video-thumb">
+              <iframe src="https://drive.google.com/file/d/1l49N_EqOPEIqdbXeO_boPALoYCWfHmtA/preview" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+              <div class="video-title">PDEU Chemical Department Video</div>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb">
+              <iframe src=https://youtube.com/embed/502LtOE7J-8" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Theme Reveal Video S&T</div>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-thumb">
+              <iframe src="https://youtube.com/embed/q-DEpIjs2UU" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+              <div class="video-title">Auditorium Reaction</div>
+            </div>
+          </div>
+        </div>
+        <div class="embed-note">
+          To embed your videos — find the commented <span>&lt;iframe&gt;</span> tag in each card and uncomment it.<br>
+          Replace <span>YOUR_VIDEO_ID</span> with your YouTube video ID &mdash; e.g. youtube.com/watch?v=<span>abc123</span> &#8594; use <span>abc123</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="divider"></div>
+<section id="achievements">
+  <div class="sec">
+    <div class="sec-header reveal">
+      <span class="sec-num">06</span>
+      <h2>Achievements</h2>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card filled reveal">
+        <div class="ach-ico">&#127942;</div>
+        <div class="ach-title">100% Merit Scholarship</div>
+        <div class="ach-desc">Full merit-based scholarship every semester at PDEU for consistently outstanding academics.</div>
+      </div>
+      <div class="ach-card reveal">
+        <div class="ach-ico">&#129352;</div>
+        <div class="ach-title">Chemfuge Podium &mdash; 2024 &amp; 2025</div>
+        <div class="ach-desc">Back-to-back podium finishes at PDEU's Chemical Engineering Quiz, two years running.</div>
+      </div>
+      <div class="ach-card reveal">
+        <div class="ach-ico">&#128240;</div>
+        <div class="ach-title">Press &amp; Media Coverage</div>
+        <div class="ach-desc">Solar tracker project featured in two regional newspapers and a news channel.</div>
+      </div>
+      <div class="ach-card reveal">
+        <div class="ach-ico">&#127894;</div>
+        <div class="ach-title">A+ &mdash; IIT-Roorkee NPTEL</div>
+        <div class="ach-desc">Top grade in Polymer Process Engineering from IIT-Roorkee.</div>
+      </div>
+      <div class="ach-card filled reveal">
+        <div class="ach-ico">&#128301;</div>
+        <div class="ach-title">Head of PR &mdash; Brahmand</div>
+        <div class="ach-desc">Leading public relations for PDEU's astronomy club &mdash; science meets community.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME DOWNLOAD -->
+<div class="divider"></div>
+<section id="resume">
+  <div class="resume-inner">
+    <div class="reveal">
+      <div class="resume-tag">Curriculum Vitae</div>
+      <div class="resume-heading">Download my r&eacute;sum&eacute;</div>
+      <p class="resume-sub">A full overview of my education, projects, skills, and achievements &mdash; ready to share with recruiters or collaborators.</p>
+    </div>
+    <div class="resume-right reveal">
+      <div class="resume-card">
+        <div>
+          <div class="resume-filename">Aryan_Soni_Resume.pdf</div>
+          <div class="resume-filemeta">PDF &nbsp;&middot;&nbsp; Chemical Engineering &nbsp;&middot;&nbsp; 2025</div>
+        </div>
+        <a href="Aryan_Soni_Resume.pdf" download="Aryan_Soni_Resume.pdf" class="download-btn">
+          &#8595; &nbsp;Download
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="divider"></div>
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-heading">Get in touch</div>
+        <p class="contact-sub">Open to internships, research collaborations, and freelance video projects. Feel free to reach out through any of the channels below.</p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="javascript:void(0)" onclick="window.location='mai'+'lto:'+'aryan.soni7891'+'@'+'gmail.com'" class="c-link">
+          <span class="c-icon">&#9993;</span> aryan.soni7891@gmail.com
+        </a>
+        <a href="javascript:void(0)" onclick="window.location='mai'+'lto:'+'23BCH024'+'@'+'spt.pdpu.ac.in'" class="c-link">
+          <span class="c-icon">&#127979;</span> 23BCH024@spt.pdpu.ac.in
+        </a>
+        <a href="tel:+918141492374" class="c-link">
+          <span class="c-icon">&#128222;</span> +91 8141492374
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 Aryan Soni &nbsp;&middot;&nbsp; PDEU Chemical Engineering</p>
+  <p>HTML &middot; CSS &middot; JavaScript</p>
+</footer>
+
+<script>
+  // Scroll reveal — content visible by default, animates in on scroll if JS works
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    reveals.forEach(el => el.classList.add('hidden'));
+    const obs = new IntersectionObserver((entries) => {
+      let d = 0;
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.remove('hidden'), d);
+          d += 80;
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07 });
+    reveals.forEach(el => obs.observe(el));
+  }
+</script>
+</body>
+</html>
